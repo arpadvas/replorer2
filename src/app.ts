@@ -23,6 +23,7 @@ class App {
     this.express.use(logger('dev'));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: false }));
+    this.express.use(express.static(__dirname + './../client/dist/'));
   }
 
   //Configure Mongo DB
@@ -44,9 +45,10 @@ class App {
     let router = express.Router();
     // placeholder route handler
     router.get('*', (req, res, next) => {
-      res.json({
-        message: 'Hello World!'
-      });
+      // res.json({
+      //   message: 'Hello World!'
+      // });
+      res.sendFile(path.join(__dirname + './../client/dist/index.html'));
     });
     this.express.use('/', router);
   }

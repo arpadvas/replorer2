@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var path = require("path");
 var express = require("express");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
@@ -18,6 +19,7 @@ var App = (function () {
         this.express.use(logger('dev'));
         this.express.use(bodyParser.json());
         this.express.use(bodyParser.urlencoded({ extended: false }));
+        this.express.use(express.static(__dirname + './../client/dist/'));
     };
     //Configure Mongo DB
     App.prototype.connectDB = function () {
@@ -38,9 +40,10 @@ var App = (function () {
         var router = express.Router();
         // placeholder route handler
         router.get('*', function (req, res, next) {
-            res.json({
-                message: 'Hello World!'
-            });
+            // res.json({
+            //   message: 'Hello World!'
+            // });
+            res.sendFile(path.join(__dirname + './../client/dist/index.html'));
         });
         this.express.use('/', router);
     };
