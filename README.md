@@ -5,6 +5,7 @@
 
 # install node dependencies by running 'npm install'
 # install angular dependencies by running 'npm install' in client folder
+# run 'ng build' in client folder 
 
 # run 'gulp scripts' to init project
 # run 'gulp' to watch changes

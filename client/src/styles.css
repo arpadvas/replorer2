@@ -1,1 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
+
+p {
+  margin: 0;
+}
+
+img {
+  width: 14px;
+  height: 14px;
+}
+
+.tm100 {
+  margin-top: 100px;
+}
+
+.tm50 {
+  margin-top: 50px;
+}
+
+.center {
+  display: table;
+  margin: auto;
+}
+
+.no-border {
+  border-style: none;
+}
+
+.green-text {
+  color: green;
+}
+
+.form-group {
+  width: 200px;
+}
+
+.form-group input{
+  width: 100%;
+}
+
+.form-inline .form-control {
+  width: 100%;
+}
+
+.panel {
+  border-top: none;
+  border-radius: 0;
+}
+
+.finding {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.header {
+  font-family: 'Anton', sans-serif;
+}
+
+@media only screen and (min-width: 600px) {
+  .form-group {
+    width: 600px;
+  }
+}
