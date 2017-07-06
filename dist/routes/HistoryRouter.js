@@ -15,24 +15,33 @@ var HistoryRouter = (function () {
      */
     HistoryRouter.prototype.getAll = function (req, res, next) {
         history_1.History.find({}, function (err, history) {
+            //   if (err) {
+            //       res.json({ message: 'Could not find any history entry. Error:', err });
+            //   } else {
+            //       res.json( {history: history} );
+            //   }
             if (err) {
-                res.json({ message: 'Could not find any history entry. Error:', err: err });
+                return next(err);
             }
-            else {
-                res.json({ history: history });
+            if (!history) {
+                return next(new Error('Could not find any history entry.'));
             }
+            res.json({ history: history });
         });
     };
     HistoryRouter.prototype.addEntry = function (req, res, next) {
         if (req.body.keyword) {
             var entry = new history_1.History({ keyword: req.body.keyword });
             entry.save(function (err) {
+                // if (err) {
+                //     res.json({ message: 'Could not save history entry. Error:', err });
+                // } else {
+                //     res.json({ message: 'History entry has been saved.' });
+                // }
                 if (err) {
-                    res.json({ message: 'Could not save history entry. Error:', err: err });
+                    return next(err);
                 }
-                else {
-                    res.json({ message: 'History entry has been saved.' });
-                }
+                res.json({ message: 'History entry has been saved.' });
             });
         }
         else {

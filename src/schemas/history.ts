@@ -10,7 +10,7 @@ export var HistorySchema: Schema = new Schema({
   keyword: String
 });
 
-HistorySchema.pre("save", function(next) {
+HistorySchema.pre("save", (next) => {
   let now = new Date();
   if (!this.createdAt) {
     this.createdAt = now;
