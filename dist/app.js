@@ -5,6 +5,7 @@ var express = require("express");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var HistoryRouter_1 = require("./routes/HistoryRouter");
 // Creates and configures an ExpressJS web server.
 var App = (function () {
     //Run configuration methods on the Express instance.
@@ -21,7 +22,7 @@ var App = (function () {
         this.express.use(bodyParser.urlencoded({ extended: false }));
         this.express.use(express.static(__dirname + './../client/dist/'));
     };
-    //Configure Mongo DB
+    // Configure Mongo DB
     App.prototype.connectDB = function () {
         mongoose.connect('mongodb://avas:V1CeeMoXPPnegBtB@replorer-shard-00-00-iv9tu.mongodb.net:27017,replorer-shard-00-01-iv9tu.mongodb.net:27017,replorer-shard-00-02-iv9tu.mongodb.net:27017/test?ssl=true&replicaSet=Replorer-shard-0&authSource=admin', function (err) {
             if (err) {
@@ -34,18 +35,14 @@ var App = (function () {
     };
     // Configure API endpoints.
     App.prototype.routes = function () {
-        /* This is just to get up and running, and to make sure what we've got is
-         * working so far. This function will change when we start to add more
-         * API endpoints */
         var router = express.Router();
-        // placeholder route handler
-        router.get('*', function (req, res, next) {
-            // res.json({
-            //   message: 'Hello World!'
-            // });
+        // get angular frontend
+        router.get('/', function (req, res, next) {
             res.sendFile(path.join(__dirname + './../client/dist/index.html'));
         });
         this.express.use('/', router);
+        // get REST endpoints
+        this.express.use('/api/history', HistoryRouter_1.default);
     };
     return App;
 }());
