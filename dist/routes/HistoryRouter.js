@@ -26,7 +26,7 @@ var HistoryRouter = (function () {
             if (!history) {
                 return next(new Error('Could not find any history entry.'));
             }
-            res.json({ history: history });
+            res.send(history);
         });
     };
     HistoryRouter.prototype.addEntry = function (req, res, next) {

@@ -17,18 +17,13 @@ export class HistoryRouter {
    */
   public getAll(req: Request, res: Response, next: NextFunction) {
       History.find( { }, (err, history: IHistoryModel) => {
-        //   if (err) {
-        //       res.json({ message: 'Could not find any history entry. Error:', err });
-        //   } else {
-        //       res.json( {history: history} );
-        //   }
         if (err) {
             return next(err);
         }
         if (!history) {
             return next(new Error('Could not find any history entry.'));
         }
-        res.json( {history: history} );
+        res.send(history);
       });
   }
 
@@ -36,15 +31,10 @@ export class HistoryRouter {
       if (req.body.keyword) {
         let entry = new History({ keyword: req.body.keyword });
         entry.save((err) => {
-            // if (err) {
-            //     res.json({ message: 'Could not save history entry. Error:', err });
-            // } else {
-            //     res.json({ message: 'History entry has been saved.' });
-            // }
             if (err) {
                 return next(err);
             }
-            res.json({ message: 'History entry has been saved.' });
+            res.json({ message: 'History entry has been saved.', entry });
         });
       } else {
           res.json({ message: 'Keyword has not been provided!' });

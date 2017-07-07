@@ -1,9 +1,9 @@
 <div class="container tm100">
 	<h2 class="header center">Replorer</h2>
 	<br>
-    <form class="form-inline center">
+    <form [formGroup]="form" (submit)="onSearchSubmit()" class="form-inline center">
         <div class="form-group">
-          <input type="text" class="form-control" name="searchKeyword" placeholder="Search repo...">
+          <input type="text" class="form-control" name="keyword" placeholder="Search repo..." formControlName="keyword">
         </div>
         <button type="submit" class="btn btn-default">Search</button>
 	  </form>
