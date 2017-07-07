@@ -1,1 +1,10 @@
-<h1 class="page-header">History Route</h1>
+<h1 class="page-header">Search history</h1>
+<!--<p class="text-info">Only shows tha last 20 entries</p>-->
+
+<div class="tm50">
+    <dl *ngFor="let entry of history">
+        <dt>{{entry.keyword}}</dt>
+        <dd>{{entry.createdAt | date:'medium'}}</dd>
+    </dl>
+</div>
+

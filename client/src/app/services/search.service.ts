@@ -14,5 +14,9 @@ export class SearchService {
   storeHistoryEntry(historyEntry) {
     return this.http.post(this.domain + '/api/history/add', historyEntry).map(res => res.json());
   }
+
+  getAllHistory() {
+    return this.http.get(this.domain + '/api/history').map(res => res.json());
+  }
   
 }
