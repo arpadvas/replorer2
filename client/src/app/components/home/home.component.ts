@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,8 @@ export class HomeComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private searchService: SearchService 
   ) { 
     this.createForm();
   }
@@ -23,7 +25,14 @@ export class HomeComponent implements OnInit {
   }
 
   onSearchSubmit() {
-    console.log(this.form);
+
+    const historyEntry = {
+      keyword: this.form.get('keyword').value
+    }
+
+    this.searchService.storeHistoryEntry(historyEntry).subscribe(data => {
+      console.log(data);
+    });
   }
 
   ngOnInit() {

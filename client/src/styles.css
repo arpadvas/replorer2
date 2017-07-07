@@ -42,6 +42,10 @@ img {
   width: 100%;
 }
 
+.navbar {
+  border-radius: 0;
+}
+
 .panel {
   border-top: none;
   border-radius: 0;

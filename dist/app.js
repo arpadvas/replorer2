@@ -6,6 +6,7 @@ var logger = require("morgan");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var HistoryRouter_1 = require("./routes/HistoryRouter");
+var cors = require("cors");
 // Creates and configures an ExpressJS web server.
 var App = (function () {
     //Run configuration methods on the Express instance.
@@ -17,6 +18,9 @@ var App = (function () {
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {
+        this.express.use(cors({
+            origin: 'http://localhost:4200'
+        }));
         this.express.use(logger('dev'));
         this.express.use(bodyParser.json());
         this.express.use(bodyParser.urlencoded({ extended: false }));

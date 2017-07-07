@@ -4,6 +4,7 @@ import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
 import HistoryRouter from './routes/HistoryRouter';
+import * as cors from 'cors';
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -21,6 +22,9 @@ class App {
 
   // Configure Express middleware.
   private middleware(): void {
+    this.express.use(cors({
+      origin: 'http://localhost:4200'
+    }));
     this.express.use(logger('dev'));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: false }));
