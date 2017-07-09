@@ -10,6 +10,7 @@ import { SearchService } from '../../services/search.service';
 export class HomeComponent implements OnInit {
 
   form: FormGroup;
+  items;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,9 +31,17 @@ export class HomeComponent implements OnInit {
       keyword: this.form.get('keyword').value
     }
 
+    let searchKeyWord: string = this.form.get('keyword').value;
+
     this.searchService.storeHistoryEntry(historyEntry).subscribe(data => {
       console.log(data);
     });
+
+    this.searchService.getFindings(searchKeyWord, 1).subscribe(data => {
+      this.items = data.items;
+      console.log(data);
+    });
+
   }
 
   ngOnInit() {
