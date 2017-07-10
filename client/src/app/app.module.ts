@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { AlertModule } from 'ngx-bootstrap';
+import { PaginationModule } from 'ngx-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { HistoryComponent } from './components/history/history.component';
@@ -20,10 +21,11 @@ import { SearchService } from './services/search.service';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
-    AlertModule.forRoot()
+    PaginationModule.forRoot()
   ],
   providers: [SearchService],
   bootstrap: [AppComponent]

@@ -20,4 +20,6 @@
       </div>
     </div>
 
+    <pagination *ngIf="items" class="pagination-sm center" [totalItems]="total_count" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" [maxSize]="maxSize"></pagination>
+
 </div>

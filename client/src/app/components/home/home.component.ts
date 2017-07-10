@@ -10,7 +10,10 @@ import { SearchService } from '../../services/search.service';
 export class HomeComponent implements OnInit {
 
   form: FormGroup;
-  items;
+  items = undefined;
+  total_count: number = 0;
+  currentPage: number = 1;
+  maxSize: number = 10;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,9 +42,17 @@ export class HomeComponent implements OnInit {
 
     this.searchService.getFindings(searchKeyWord, 1).subscribe(data => {
       this.items = data.items;
-      console.log(data);
+      this.total_count = data.total_count;
     });
 
+  }
+
+  pageChanged(event:any):void {
+    let searchKeyWord: string = this.form.get('keyword').value;
+    this.searchService.getFindings(searchKeyWord, event.page).subscribe(data => {
+      this.items = data.items;
+      this.total_count = data.total_count;
+    });
   }
 
   ngOnInit() {
